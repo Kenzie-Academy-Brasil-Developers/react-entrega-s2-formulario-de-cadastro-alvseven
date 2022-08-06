@@ -11,7 +11,7 @@ export const Container = styled.div`
   img {
     width: 6.25rem;
     height: 0.9rem;
-    margin-top: 4rem;
+    margin-top: 5rem;
   }
 `;
 
@@ -90,6 +90,10 @@ export const FormContainer = styled.form`
     font-weight: 500;
     font-size: 13px;
     color: #ffffff;
+  }
+
+  @media (min-width: 524px) {
+    max-width: 28rem;
   }
 `;
 

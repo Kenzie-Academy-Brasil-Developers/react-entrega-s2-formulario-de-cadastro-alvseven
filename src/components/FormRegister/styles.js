@@ -90,6 +90,23 @@ export const FormContainer = styled.form`
     font-size: 13px;
     color: #ffffff;
   }
+
+  select {
+    height: 2rem;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 0.9rem;
+    background-color: #343b41;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: #868e96;
+    padding: 0 0.9rem;
+  }
+
+  @media (min-width: 524px) {
+    max-width: 28rem;
+  }
 `;
 
 export const Error = styled.span`

@@ -10,6 +10,7 @@ import { loginFormSchema } from "../../utils/schema";
 import { api } from "../../services/api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 export default function FormLogin() {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -17,6 +18,12 @@ export default function FormLogin() {
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
   };
+
+  const navigate = useNavigate();
+
+  function redirect() {
+    navigate("/dashboard", { replace: true });
+  }
 
   const {
     register,
@@ -36,23 +43,40 @@ export default function FormLogin() {
       })
       .then((res) => {
         if (res.data.token) {
-          toast.success("Login realizado com sucesso!", {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 3000,
-          });
+          localStorage.setItem("@kenzie-hub:token", res.data.token);
+          localStorage.setItem("@kenzie-hub:userId", res.data.user.id);
+          setTimeout(
+            () =>
+              toast.success("Login realizado com sucesso!", {
+                position: toast.POSITION.RIGHT_CENTER,
+                autoClose: 2000,
+              }),
+            2500
+          );
+          setTimeout(redirect, 6000);
         }
       })
       .catch((err) => {
         if (err) {
-          toast.error(
-            "Não foi possível realizar login, preencha os campos corretamente",
-            {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 3000,
-            }
+          setTimeout(
+            () =>
+              toast.error(
+                "Não foi possível realizar o login! dados informados incorretos",
+                {
+                  position: toast.POSITION.RIGHT_CENTER,
+                  autoClose: 2000,
+                }
+              ),
+            2500
           );
         }
-      });
+      })
+      .finally(
+        toast.info("Só um instante...", {
+          position: toast.POSITION.RIGHT_CENTER,
+          autoClose: 2000,
+        })
+      );
   };
 
   return (

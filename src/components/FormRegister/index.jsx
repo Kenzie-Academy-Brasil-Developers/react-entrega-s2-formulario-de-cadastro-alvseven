@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -32,11 +32,42 @@ export default function FormRegister() {
       })
       .then((res) => {
         if (res.data.id) {
-          toast.success("Usuário criado com sucesso!");
+          setTimeout(
+            () =>
+              toast.success("Conta criada com sucesso!", {
+                position: toast.POSITION.RIGHT_CENTER,
+                autoClose: 2000,
+              }),
+            2500
+          );
+          setTimeout(redirect, 6000);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err) {
+          setTimeout(
+            () =>
+              toast.error("Não foi possível criar a sua conta!", {
+                position: toast.POSITION.RIGHT_CENTER,
+                autoClose: 2000,
+              }),
+            2500
+          );
+        }
+      })
+      .finally(
+        toast.info("Conferindo os dados...", {
+          position: toast.POSITION.RIGHT_CENTER,
+          autoClose: 2000,
+        })
+      );
   };
+
+  const navigate = useNavigate();
+
+  function redirect() {
+    navigate("/", { replace: true });
+  }
 
   return (
     <Container>
@@ -106,10 +137,18 @@ export default function FormRegister() {
 
         <label htmlFor="module">Módulo</label>
         <select {...register("course_module")}>
-          <option value="primeiroModulo">Primeiro Módulo</option>
-          <option value="segundoModulo">Segundo Módulo</option>
-          <option value="terceiroModulo">Terceiro Módulo</option>
-          <option value="quartoModulo">Quarto Módulo</option>
+          <option value="Primeiro módulo (Introdução ao Frontend)">
+            Primeiro Módulo
+          </option>
+          <option value="Segundo módulo (Frontend Avançado)">
+            Segundo Módulo
+          </option>
+          <option value="Terceiro módulo (Introdução ao Backend)">
+            Terceiro Módulo
+          </option>
+          <option value="Quarto módulo (Backend Avançado)">
+            Quarto Módulo
+          </option>
         </select>
 
         <Link to="/">Já possui uma conta? Clique aqui para fazer login</Link>

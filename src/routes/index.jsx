@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import FormLogin from "../components/FormLogin";
-import FormRegister from "../components/FormRegister";
+import Dashboard from "../pages/Dashboard";
+import Homepage from "../pages/Homepage";
+import Register from "../pages/Register";
 
 function RoutesMain() {
   return (
     <Routes>
-      <Route path="/" element={<FormLogin />} />
-      <Route path="/register" element={<FormRegister />} />
+      <Route path="/" element={<Homepage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 }
