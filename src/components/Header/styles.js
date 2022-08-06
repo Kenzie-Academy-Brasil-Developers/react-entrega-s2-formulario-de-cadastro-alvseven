@@ -13,12 +13,11 @@ export const HeaderContainer = styled.div`
     width: 4rem;
     height: 1rem;
     padding: 0.5rem 0;
-    text-align: center;
     font-family: "Inter";
-    font-weight: 600;
     font-size: 0.75rem;
-    text-align: center;
+    font-weight: 600;
     text-decoration: none;
+    text-align: center;
     color: #f8f9fa;
     background-color: #212529;
     border-radius: 4px;

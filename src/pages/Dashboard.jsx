@@ -1,6 +1,6 @@
 import Header from "../components/Header";
-import Techs from "../components/Techs";
 import UserInfo from "../components/UserInfo";
+import Techs from "../components/Techs";
 
 export default function Dashboard() {
   return (

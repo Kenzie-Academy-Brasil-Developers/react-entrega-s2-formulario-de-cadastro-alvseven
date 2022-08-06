@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link } from "react-router-dom";
 
-import { Container, FormContainer, Error } from "./styles";
-import { AiFillEye } from "react-icons/ai";
-import { AiFillEyeInvisible } from "react-icons/ai";
 import { loginFormSchema } from "../../utils/schema";
 import { api } from "../../services/api";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+import { AiFillEye } from "react-icons/ai";
+import { AiFillEyeInvisible } from "react-icons/ai";
+
+import { Container, FormContainer, Error } from "./styles";
 
 export default function FormLogin() {
   const [passwordShown, setPasswordShown] = useState(false);

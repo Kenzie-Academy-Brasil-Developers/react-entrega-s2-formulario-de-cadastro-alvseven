@@ -20,7 +20,14 @@ export default function UserInfo() {
           autoClose: 4000,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err) {
+          toast.error("Ops, algo deu errado =(", {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 4000,
+          });
+        }
+      });
   }, []);
 
   return (

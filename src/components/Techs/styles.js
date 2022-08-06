@@ -6,24 +6,24 @@ export const Container = styled.div`
 
   h4 {
     font-family: "Inter";
-    font-weight: 700;
     font-size: 0.75rem;
+    font-weight: 700;
     color: #f8f9fa;
     margin-bottom: 1rem;
   }
 
   p {
     font-family: "Inter";
-    font-weight: 400;
     font-size: 0.5rem;
+    font-weight: 400;
     color: #ffffff;
   }
 
   @media (min-width: 524px) {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     h4 {
       font-size: 1.2rem;

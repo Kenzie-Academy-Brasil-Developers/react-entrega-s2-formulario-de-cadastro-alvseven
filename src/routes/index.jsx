@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
 import Homepage from "../pages/Homepage";
+import Dashboard from "../pages/Dashboard";
 import Register from "../pages/Register";
 
 function RoutesMain() {
