@@ -24,7 +24,7 @@ export const FormContainer = styled.form`
   background-color: #212529;
   box-shadow: 0px 3.20867px 32.0867px -8.02168px rgba(0, 0, 0, 0.25);
   border-radius: 3.20867px;
-  width: 80%;
+  width: 90%;
 
   h3 {
     font-family: "Inter", sans-serif;

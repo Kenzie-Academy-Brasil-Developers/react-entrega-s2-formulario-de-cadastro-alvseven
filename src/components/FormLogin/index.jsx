@@ -1,47 +1,63 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { Link } from "react-router-dom";
-import {
-  AtLeastEightDigits,
-  atLeastOneLowerCase,
-  atLeastOneNumber,
-  atLeastOneSpecialCharacter,
-  atLeastOneUpperCase,
-} from "../../utils/validations";
 
 import { Container, FormContainer, Error } from "./styles";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
+import { loginFormSchema } from "../../utils/schema";
+import { api } from "../../services/api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FormLogin() {
   const [passwordShown, setPasswordShown] = useState(false);
 
-  const togglePassword = () => {
+  const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
   };
-
-  const formSchema = yup.object().shape({
-    email: yup
-      .string()
-      .required("Por favor preencha o campo email")
-      .email("Formato de email inválido"),
-    password: yup.string().required("Por favor preencha o campo senha"),
-  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(loginFormSchema),
   });
 
-  const submit = (data) => console.log(data);
+  const submit = (data) => {
+    const { email, password } = data;
+
+    api
+      .post("/sessions", {
+        email,
+        password,
+      })
+      .then((res) => {
+        if (res.data.token) {
+          toast.success("Login realizado com sucesso!", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          });
+        }
+      })
+      .catch((err) => {
+        if (err) {
+          toast.error(
+            "Não foi possível realizar login, preencha os campos corretamente",
+            {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000,
+            }
+          );
+        }
+      });
+  };
 
   return (
     <Container>
+      <ToastContainer />
       <img src="./logo.svg" alt="logo kenzie hub" />
       <FormContainer onSubmit={handleSubmit(submit)}>
         <h3>Login</h3>
@@ -64,7 +80,7 @@ export default function FormLogin() {
             placeholder="**********"
             {...register("password")}
           />
-          <span onClick={togglePassword}>
+          <span onClick={togglePasswordVisibility}>
             {passwordShown ? <AiFillEye /> : <AiFillEyeInvisible />}
           </span>
         </div>

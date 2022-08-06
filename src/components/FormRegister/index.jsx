@@ -1,56 +1,48 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import {
-  AtLeastEightDigits,
-  atLeastOneLowerCase,
-  atLeastOneNumber,
-  atLeastOneSpecialCharacter,
-  atLeastOneUpperCase,
-} from "../../utils/validations";
 
+import { registerFormSchema } from "../../utils/schema";
+import { api } from "../../services/api";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Container, FormContainer, Error } from "./styles";
 
 export default function FormRegister() {
-  const formSchema = yup.object().shape({
-    email: yup.string().required().email(),
-    password: yup
-      .string()
-      .required()
-      .matches(
-        atLeastOneLowerCase,
-        "A senha deve conter pelo menos uma letra minúscula"
-      )
-      .matches(
-        atLeastOneUpperCase,
-        "A senha deve conter pelo menos uma letra maiúscula"
-      )
-      .matches(atLeastOneNumber, "A senha deve conter pelo menos 1 número")
-      .matches(
-        atLeastOneSpecialCharacter,
-        "A senha deve conter pelo menos um caractere especial"
-      )
-      .matches(
-        AtLeastEightDigits,
-        "A senha deve conter pelo menos 8 caracteres"
-      ),
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(formSchema),
+    resolver: yupResolver(registerFormSchema),
   });
 
-  const submit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const { email, password, name, bio, contact, course_module } = data;
+
+    api
+      .post("/users", {
+        email,
+        password,
+        name,
+        bio,
+        contact,
+        course_module,
+      })
+      .then((res) => {
+        if (res.data.id) {
+          toast.success("Usuário criado com sucesso!");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Container>
+      <ToastContainer />
       <img src="./logo.svg" alt="logo kenzie hub" />
-      <FormContainer onSubmit={handleSubmit(submit)}>
+      <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <h3>Crie sua conta</h3>
 
         <label htmlFor="name">Nome</label>
@@ -100,7 +92,7 @@ export default function FormRegister() {
           placeholder="Fale sobre você"
           {...register("bio")}
         />
-        <Error>{errors.confirmPassword?.message}</Error>
+        <Error>{errors.bio?.message}</Error>
 
         <label htmlFor="contact">Contato</label>
 
@@ -113,7 +105,7 @@ export default function FormRegister() {
         <Error>{errors.contact?.message} </Error>
 
         <label htmlFor="module">Módulo</label>
-        <select>
+        <select {...register("course_module")}>
           <option value="primeiroModulo">Primeiro Módulo</option>
           <option value="segundoModulo">Segundo Módulo</option>
           <option value="terceiroModulo">Terceiro Módulo</option>
