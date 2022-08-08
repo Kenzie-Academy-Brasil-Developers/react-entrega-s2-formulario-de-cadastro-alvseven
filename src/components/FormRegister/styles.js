@@ -20,7 +20,7 @@ export const FormContainer = styled.form`
   flex-direction: column;
   gap: 1rem;
   width: 90%;
-  margin: 1.25rem 0 2rem 0;
+  margin-top: 1.25rem;
   padding: 2rem 1rem;
   background-color: #212529;
   border-radius: 3px;
@@ -94,13 +94,13 @@ export const FormContainer = styled.form`
     font-weight: 500;
     font-size: 1rem;
     color: #ffffff;
-    background-color: #ff577f;
-    border: 1.3px solid #ff577f;
+    background-color: #59323f;
+    border: 1.3px solid #59323f;
     border-radius: 4px;
 
     :hover {
       transition: 500ms;
-      color: #ff577f;
+      color: #59323f;
       background-color: #f8f9fa;
     }
 
@@ -122,6 +122,10 @@ export const FormContainer = styled.form`
 
   @media (min-width: 524px) {
     max-width: 28rem;
+  }
+
+  @media (max-height: 915px) {
+    margin-bottom: 2rem;
   }
 `;
 

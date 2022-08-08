@@ -11,6 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Container, FormContainer, Error } from "./styles";
 
 export default function FormRegister() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -41,17 +43,20 @@ export default function FormRegister() {
               }),
             2500
           );
-          setTimeout(redirect, 6000);
+          setTimeout(() => navigate("/", { replace: true }), 6000);
         }
       })
       .catch((err) => {
-        if (err) {
+        if (err.response.data.message) {
           setTimeout(
             () =>
-              toast.error("Não foi possível criar a sua conta!", {
-                position: toast.POSITION.RIGHT_CENTER,
-                autoClose: 2000,
-              }),
+              toast.error(
+                "Não foi possível criar a sua conta, email já cadastrado!",
+                {
+                  position: toast.POSITION.RIGHT_CENTER,
+                  autoClose: 2000,
+                }
+              ),
             2500
           );
         }
@@ -63,12 +68,6 @@ export default function FormRegister() {
         })
       );
   };
-
-  const navigate = useNavigate();
-
-  function redirect() {
-    navigate("/", { replace: true });
-  }
 
   return (
     <Container>

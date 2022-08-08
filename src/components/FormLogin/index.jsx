@@ -22,10 +22,6 @@ export default function FormLogin() {
 
   const navigate = useNavigate();
 
-  function redirect() {
-    navigate("/dashboard", { replace: true });
-  }
-
   const {
     register,
     handleSubmit,
@@ -54,7 +50,7 @@ export default function FormLogin() {
               }),
             2500
           );
-          setTimeout(redirect, 6000);
+          setTimeout(() => navigate("/dashboard", { replace: true }), 6000);
         }
       })
       .catch((err) => {

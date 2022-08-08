@@ -63,6 +63,7 @@ export const FormContainer = styled.form`
   }
 
   input {
+    width: 87%;
     height: 2rem;
     padding: 0 0.9rem;
     font-family: "Inter";

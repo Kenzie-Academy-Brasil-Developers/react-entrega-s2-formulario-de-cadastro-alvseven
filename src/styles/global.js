@@ -28,10 +28,11 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body, html {
-	width: 100vw;
-    height: 100vh;
+	width: 100%;
+    min-height: 100vh;
     background-color: 
 #090909;
+
 }
 ol, ul {
 	list-style: none;
