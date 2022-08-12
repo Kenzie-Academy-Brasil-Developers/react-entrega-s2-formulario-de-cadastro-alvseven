@@ -3,15 +3,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { registerFormSchema } from "../../utils/schema";
-import { api } from "../../services/api";
 
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Container, FormContainer, Error } from "./styles";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default function FormRegister() {
-  const navigate = useNavigate();
+  const { onSubmit } = useContext(AuthContext);
 
   const {
     register,
@@ -21,53 +21,53 @@ export default function FormRegister() {
     resolver: yupResolver(registerFormSchema),
   });
 
-  const onSubmit = (data) => {
-    const { email, password, name, bio, contact, course_module } = data;
+  // const onSubmit = (data) => {
+  //   const { email, password, name, bio, contact, course_module } = data;
 
-    api
-      .post("/users", {
-        email,
-        password,
-        name,
-        bio,
-        contact,
-        course_module,
-      })
-      .then((res) => {
-        if (res.data.id) {
-          setTimeout(
-            () =>
-              toast.success("Conta criada com sucesso!", {
-                position: toast.POSITION.RIGHT_CENTER,
-                autoClose: 2000,
-              }),
-            2500
-          );
-          setTimeout(() => navigate("/", { replace: true }), 6000);
-        }
-      })
-      .catch((err) => {
-        if (err.response.data.message) {
-          setTimeout(
-            () =>
-              toast.error(
-                "Não foi possível criar a sua conta, email já cadastrado!",
-                {
-                  position: toast.POSITION.RIGHT_CENTER,
-                  autoClose: 2000,
-                }
-              ),
-            2500
-          );
-        }
-      })
-      .finally(
-        toast.info("Conferindo os dados...", {
-          position: toast.POSITION.RIGHT_CENTER,
-          autoClose: 2000,
-        })
-      );
-  };
+  //   api
+  //     .post("/users", {
+  //       email,
+  //       password,
+  //       name,
+  //       bio,
+  //       contact,
+  //       course_module,
+  //     })
+  //     .then((res) => {
+  //       if (res.data.id) {
+  //         setTimeout(
+  //           () =>
+  //             toast.success("Conta criada com sucesso!", {
+  //               position: toast.POSITION.RIGHT_CENTER,
+  //               autoClose: 2000,
+  //             }),
+  //           2500
+  //         );
+  //         setTimeout(() => navigate("/", { replace: true }), 6000);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       if (err.response.data.message) {
+  //         setTimeout(
+  //           () =>
+  //             toast.error(
+  //               "Não foi possível criar a sua conta, email já cadastrado!",
+  //               {
+  //                 position: toast.POSITION.RIGHT_CENTER,
+  //                 autoClose: 2000,
+  //               }
+  //             ),
+  //           2500
+  //         );
+  //       }
+  //     })
+  //     .finally(
+  //       toast.info("Conferindo os dados...", {
+  //         position: toast.POSITION.RIGHT_CENTER,
+  //         autoClose: 2000,
+  //       })
+  //     );
+  // };
 
   return (
     <Container>
