@@ -16,7 +16,7 @@ export const AddContainer = styled.div`
     letter-spacing: 2px;
   }
 
-  @media (min-width: 608px) {
+  @media (min-width: 688px) {
     width: 65%;
     justify-content: space-around;
 
