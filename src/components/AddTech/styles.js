@@ -31,6 +31,7 @@ export const AddButton = styled.button`
   font-size: 1.3rem;
   color: #2ceaa3;
   background-color: #212325;
+  border: 1px solid transparent;
   border-radius: 4px;
 
   :hover {
@@ -38,6 +39,7 @@ export const AddButton = styled.button`
     transform: rotateX(180deg);
     color: #212325;
     background-color: #2ceaa3;
+    border: 1px solid transparent;
   }
 
   @media (min-width: 1024px) {

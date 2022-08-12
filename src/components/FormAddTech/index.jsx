@@ -19,18 +19,10 @@ export default function Form({ toggleModalAddVisibility }) {
 
   const createTech = (data) => {
     api
-      .post(
-        "/users/techs",
-        {
-          title: data.title,
-          status: data.status,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .post("/users/techs", {
+        title: data.title,
+        status: data.status,
+      })
       .then((res) => {
         if (res.request.status === 201) {
           toggleModalAddVisibility();
@@ -41,10 +33,16 @@ export default function Form({ toggleModalAddVisibility }) {
         }
       })
       .catch((err) => {
-        if (err) {
+        console.log(err);
+        if (err.response.status === 401) {
           toast.error("Tecnologia já cadastrada!", {
             position: toast.POSITION.RIGHT_CENTER,
             autoClose: 2000,
+          });
+        } else {
+          toast.error("Oops, algo deu errado :(", {
+            position: toast.POSITION.RIGHT_CENTER,
+            autoClose: 3000,
           });
         }
       });

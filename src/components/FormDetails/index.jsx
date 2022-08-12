@@ -2,46 +2,19 @@ import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { ModalInner, RegisterTechForm } from "./styles";
 import { ModalContainer, CloseContainer } from "./styles";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
-export default function Form({
-  techId,
-  modalDetailsIsOpen,
-  setModalDetailsIsOpen,
-}) {
-  const token = localStorage.getItem("@kenzie-hub:token");
-  const userId = localStorage.getItem("@kenzie-hub:userId");
-  const [techName, setTechName] = useState("");
+export default function Form({ modalDetailsIsOpen, setModalDetailsIsOpen }) {
   const [techStatus, setTechStatus] = useState("Iniciante");
 
-  useEffect(() => {
-    api
-      .get(`users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        const techs = res.data.techs;
-        const tech = techs.find((tech) => tech.id === techId);
-
-        setTechName(tech.title);
-      });
-  }, [techId, token, userId]);
+  const { tech, techId } = useContext(AuthContext);
 
   const updateTech = () => {
     api
-      .put(
-        `/users/techs/${techId}`,
-        {
-          status: techStatus,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      .put(`/users/techs/${techId}`, {
+        status: techStatus,
+      })
       .then((res) => {
         if (res.request.status === 201) {
           setModalDetailsIsOpen(!modalDetailsIsOpen);
@@ -55,19 +28,13 @@ export default function Form({
   };
 
   const deleteTech = () => {
-    api
-      .delete(`users/techs/${techId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setModalDetailsIsOpen(!modalDetailsIsOpen);
-        toast.success("Tecnologia excluída com sucesso!", {
-          position: toast.POSITION.RIGHT_CENTER,
-          autoClose: 2000,
-        });
+    api.delete(`users/techs/${techId}`).then((res) => {
+      setModalDetailsIsOpen(!modalDetailsIsOpen);
+      toast.success("Tecnologia excluída com sucesso!", {
+        position: toast.POSITION.RIGHT_CENTER,
+        autoClose: 2000,
       });
+    });
   };
 
   return (
@@ -82,9 +49,12 @@ export default function Form({
 
         <RegisterTechForm onSubmit={(e) => e.preventDefault()}>
           <label htmlFor="title">Nome</label>
-          <input id="title" disabled value={techName} />
+          <input id="title" disabled value={tech.title} />
           <label htmlFor="status">Selecionar status</label>
-          <select onChange={(e) => setTechStatus(e.target.value)}>
+          <select
+            defaultValue={tech.status}
+            onChange={(e) => setTechStatus(e.target.value)}
+          >
             <option value="Iniciante">Iniciante</option>
             <option value="Intermediário">Intermediário</option>
             <option value="Avançado">Avançado</option>

@@ -3,19 +3,20 @@ import { AuthContext } from "../../contexts/AuthContext";
 import { TechListItem } from "./styles";
 
 export default function TechCard({ tech }) {
-  const { modalDetailsIsOpen, setModalDetailsIsOpen, setTechId } =
+  const { modalDetailsIsOpen, setModalDetailsIsOpen, setTech, setTechId } =
     useContext(AuthContext);
 
-  const toggleModalDetailsVisibility = (event) => {
+  const toggleModalDetailsVisibility = () => {
     setModalDetailsIsOpen(!modalDetailsIsOpen);
-    setTechId(event.target.id);
+    setTech(tech);
+    setTechId(tech.id);
   };
 
   return (
     <TechListItem
       status={tech.status}
       key={tech.title}
-      onClick={(e) => toggleModalDetailsVisibility(e)}
+      onClick={() => toggleModalDetailsVisibility()}
       id={tech.id}
     >
       <h5>{tech.title}</h5>

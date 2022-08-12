@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
+  const [tech, setTech] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -121,7 +122,7 @@ const AuthProvider = ({ children }) => {
         }
       })
       .finally(
-        toast.info("Só um instante...", {
+        toast.info("Conferindo os dados...", {
           position: toast.POSITION.RIGHT_CENTER,
           autoClose: 2000,
         })
@@ -130,7 +131,7 @@ const AuthProvider = ({ children }) => {
 
   const [modalAddIsOpen, setModalAddIsOpen] = useState(false);
   const [modalDetailsIsOpen, setModalDetailsIsOpen] = useState(false);
-  const [techId, setTechId] = useState("");
+  const [techId, setTechId] = useState(null);
 
   const toggleModalAddVisibility = () => {
     setModalAddIsOpen(!modalAddIsOpen);
@@ -150,6 +151,8 @@ const AuthProvider = ({ children }) => {
         onSubmit,
         user,
         isLoading,
+        tech,
+        setTech,
       }}
     >
       {children}

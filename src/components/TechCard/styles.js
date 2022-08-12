@@ -26,7 +26,7 @@ export const TechListItem = styled.li`
 
   :hover {
     transition: 700ms;
-    background-color: slategrey;
+    background-color: #121214;
     border: 1px solid blueviolet;
   }
 
@@ -40,9 +40,9 @@ export const TechListItem = styled.li`
   }
 
   span {
-    font-family: "Nunito";
+    font-family: "Nunito", sans-serif;
     font-weight: 400;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     ${({ status }) =>
       status === "Avançado"
         ? css`
@@ -53,7 +53,7 @@ export const TechListItem = styled.li`
             color: #f68e5f;
           `
         : css`
-            color: #243b4a;
+            color: #f9c80e;
           `}
   }
 `;
