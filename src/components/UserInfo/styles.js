@@ -13,7 +13,10 @@ export const UserInfoContainer = styled.div`
     font-family: "Inter";
     font-weight: 700;
     font-size: 1.25rem;
-    color: #f8f9fa;
+    background: linear-gradient(to right, #df2935 20%, #3772ff 65%);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   p {

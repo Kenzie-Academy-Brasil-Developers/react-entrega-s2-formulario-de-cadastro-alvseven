@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginFormSchema } from "../../utils/schema";
 import { api } from "../../services/api";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
@@ -78,7 +78,7 @@ export default function FormLogin() {
 
   return (
     <Container>
-      <ToastContainer />
+
       <img src="./logo.svg" alt="logo kenzie hub" />
       <FormContainer onSubmit={handleSubmit(submit)}>
         <h3>Login</h3>

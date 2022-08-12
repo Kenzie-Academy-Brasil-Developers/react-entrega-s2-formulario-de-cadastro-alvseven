@@ -15,7 +15,7 @@ export default function UserInfo() {
     if (!localStorage.getItem("@kenzie-hub:token")) {
       navigate("/", { replace: true });
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const userId = localStorage.getItem("@kenzie-hub:userId");

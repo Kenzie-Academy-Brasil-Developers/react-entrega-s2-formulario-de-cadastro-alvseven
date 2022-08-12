@@ -49,3 +49,7 @@ export const registerFormSchema = yup.object().shape({
     .required("Por favor preencha o campo contato")
     .matches(cellphoneFormat, "Formato de número inválido"),
 });
+
+export const addTechFormSchema = yup.object().shape({
+  title: yup.string().required("Por favor preencha o campo nome"),
+});

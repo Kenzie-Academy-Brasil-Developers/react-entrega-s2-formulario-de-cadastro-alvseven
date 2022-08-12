@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { registerFormSchema } from "../../utils/schema";
 import { api } from "../../services/api";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Container, FormContainer, Error } from "./styles";
@@ -71,7 +71,6 @@ export default function FormRegister() {
 
   return (
     <Container>
-      <ToastContainer />
       <img src="./logo.svg" alt="logo kenzie hub" />
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <h3>Crie sua conta</h3>
