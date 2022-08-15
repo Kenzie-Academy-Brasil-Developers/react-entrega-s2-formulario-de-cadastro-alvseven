@@ -2,13 +2,15 @@ import { toast } from "react-toastify";
 import { api } from "../../services/api";
 import { ModalInner, RegisterTechForm } from "./styles";
 import { ModalContainer, CloseContainer } from "./styles";
-import { useState, useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
+import { useState } from "react";
 
-export default function Form({ modalDetailsIsOpen, setModalDetailsIsOpen }) {
-  const [techStatus, setTechStatus] = useState("Iniciante");
-
-  const { tech, techId } = useContext(AuthContext);
+export default function Form({
+  modalDetailsIsOpen,
+  setModalDetailsIsOpen,
+  tech,
+  techId,
+}) {
+  const [techStatus, setTechStatus] = useState(tech.status);
 
   const updateTech = () => {
     api
@@ -60,7 +62,12 @@ export default function Form({ modalDetailsIsOpen, setModalDetailsIsOpen }) {
             <option value="Avançado">Avançado</option>
           </select>
 
-          <button onClick={updateTech}>Editar tecnologia</button>
+          <button
+            disabled={techStatus !== tech.status ? false : true}
+            onClick={updateTech}
+          >
+            Editar tecnologia
+          </button>
           <button onClick={deleteTech}>Excluir tecnologia</button>
         </RegisterTechForm>
       </ModalContainer>

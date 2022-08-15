@@ -7,8 +7,9 @@ import { registerFormSchema } from "../../utils/schema";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Container, FormContainer, Error } from "./styles";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { normalizePhoneNumber } from "../../utils/phonemask";
 
 export default function FormRegister() {
   const { onSubmit } = useContext(AuthContext);
@@ -16,58 +17,18 @@ export default function FormRegister() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(registerFormSchema),
   });
 
-  // const onSubmit = (data) => {
-  //   const { email, password, name, bio, contact, course_module } = data;
+  const phoneValue = watch("contact");
 
-  //   api
-  //     .post("/users", {
-  //       email,
-  //       password,
-  //       name,
-  //       bio,
-  //       contact,
-  //       course_module,
-  //     })
-  //     .then((res) => {
-  //       if (res.data.id) {
-  //         setTimeout(
-  //           () =>
-  //             toast.success("Conta criada com sucesso!", {
-  //               position: toast.POSITION.RIGHT_CENTER,
-  //               autoClose: 2000,
-  //             }),
-  //           2500
-  //         );
-  //         setTimeout(() => navigate("/", { replace: true }), 6000);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       if (err.response.data.message) {
-  //         setTimeout(
-  //           () =>
-  //             toast.error(
-  //               "Não foi possível criar a sua conta, email já cadastrado!",
-  //               {
-  //                 position: toast.POSITION.RIGHT_CENTER,
-  //                 autoClose: 2000,
-  //               }
-  //             ),
-  //           2500
-  //         );
-  //       }
-  //     })
-  //     .finally(
-  //       toast.info("Conferindo os dados...", {
-  //         position: toast.POSITION.RIGHT_CENTER,
-  //         autoClose: 2000,
-  //       })
-  //     );
-  // };
+  useEffect(() => {
+    setValue("contact", normalizePhoneNumber(phoneValue));
+  }, [phoneValue, setValue]);
 
   return (
     <Container>
@@ -129,7 +90,7 @@ export default function FormRegister() {
         <input
           type={"tel"}
           id="contato"
-          placeholder="(99) 98765-4321"
+          placeholder="Digite seu número de celular"
           {...register("contact")}
         />
         <Error>{errors.contact?.message} </Error>

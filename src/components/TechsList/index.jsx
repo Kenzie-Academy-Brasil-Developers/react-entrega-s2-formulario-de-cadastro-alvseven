@@ -3,7 +3,12 @@ import { api } from "../../services/api";
 import TechCard from "../TechCard";
 import { EmptyTechContainer, List } from "./styles";
 
-export default function TechsList() {
+export default function TechsList({
+  modalDetailIsOpen,
+  setModalDetailsIsOpen,
+  setTech,
+  setTechId,
+}) {
   const userId = localStorage.getItem("@kenzie-hub:userId");
 
   const [techs, setTechs] = useState([]);
@@ -17,7 +22,16 @@ export default function TechsList() {
       {techs.length > 0 ? (
         <List>
           {techs.map((tech) => {
-            return <TechCard tech={tech} key={tech.id} />;
+            return (
+              <TechCard
+                tech={tech}
+                key={tech.id}
+                modalDetailIsOpen={modalDetailIsOpen}
+                setModalDetailsIsOpen={setModalDetailsIsOpen}
+                setTechId={setTechId}
+                setTech={setTech}
+              />
+            );
           })}
         </List>
       ) : (

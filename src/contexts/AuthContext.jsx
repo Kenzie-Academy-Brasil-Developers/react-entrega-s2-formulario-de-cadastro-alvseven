@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const [tech, setTech] = useState(null);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -21,6 +20,7 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
           console.error(error);
         }
+        navigate("/dashboard", { replace: true });
       }
 
       setIsLoading(false);
@@ -129,30 +129,13 @@ const AuthProvider = ({ children }) => {
       );
   };
 
-  const [modalAddIsOpen, setModalAddIsOpen] = useState(false);
-  const [modalDetailsIsOpen, setModalDetailsIsOpen] = useState(false);
-  const [techId, setTechId] = useState(null);
-
-  const toggleModalAddVisibility = () => {
-    setModalAddIsOpen(!modalAddIsOpen);
-  };
-
   return (
     <AuthContext.Provider
       value={{
-        modalAddIsOpen,
-        setModalAddIsOpen,
-        modalDetailsIsOpen,
-        setModalDetailsIsOpen,
-        techId,
-        setTechId,
-        toggleModalAddVisibility,
         submit,
         onSubmit,
         user,
         isLoading,
-        tech,
-        setTech,
       }}
     >
       {children}

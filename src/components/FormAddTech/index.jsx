@@ -6,9 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { addTechFormSchema } from "../../utils/schema";
 import { ModalContainer, CloseContainer } from "./styles";
 
-export default function Form({ toggleModalAddVisibility }) {
-  const token = localStorage.getItem("@kenzie-hub:token");
-
+export default function FormAddTech({ toggleModalAddVisibility }) {
   const {
     register,
     handleSubmit,
