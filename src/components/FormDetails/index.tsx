@@ -1,9 +1,10 @@
 import { toast } from "react-toastify";
-import { api } from "../../services/api";
 import { ModalInner, RegisterTechForm } from "./styles";
 import { ModalContainer, CloseContainer } from "./styles";
 import { useState, Dispatch, SetStateAction } from "react";
 import { UserTechs } from "../../services/getUser";
+import { editUserTech } from "../../services/editTech";
+import { deleteUserTech } from "../../services/deleteTech";
 
 export interface FormEditProps {
   modalDetailsIsOpen: boolean;
@@ -21,12 +22,9 @@ export default function Form({
   const [techStatus, setTechStatus] = useState(tech.status);
 
   const updateTech = () => {
-    api
-      .put(`/users/techs/${techId}`, {
-        status: techStatus,
-      })
+    editUserTech(techStatus, techId)
       .then((res) => {
-        if (res.request.status === 201) {
+        if (res) {
           setModalDetailsIsOpen(!modalDetailsIsOpen);
           toast.success("Tecnologia editada com sucesso!", {
             position: toast.POSITION.TOP_RIGHT,
@@ -38,7 +36,7 @@ export default function Form({
   };
 
   const deleteTech = () => {
-    api.delete(`users/techs/${techId}`).then((res) => {
+    deleteUserTech(techId).then((res) => {
       setModalDetailsIsOpen(!modalDetailsIsOpen);
       toast.success("Tecnologia excluída com sucesso!", {
         position: toast.POSITION.TOP_RIGHT,

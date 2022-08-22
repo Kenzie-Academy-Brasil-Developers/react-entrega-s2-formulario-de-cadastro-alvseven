@@ -36,8 +36,12 @@ const AuthProvider = ({ children }: AuthProps) => {
       const token = localStorage.getItem("@kenzie-hub:token");
       if (token) {
         try {
-          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          const { data } = await api.get("/profile");
+          const token = localStorage.getItem("@kenzie-hub:token");
+          const { data } = await api.get("/profile", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           setUser(data);
         } catch (error) {
           console.error(error);

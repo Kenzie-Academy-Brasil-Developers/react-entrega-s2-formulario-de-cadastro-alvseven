@@ -4,12 +4,8 @@ import { RegisterTechForm, Error, ModalInner } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addTechFormSchema } from "../../utils/schema";
+import { CreateTechProps, createUserTech } from "../../services/createTech";
 import { ModalContainer, CloseContainer } from "./styles";
-
-interface CreateTechProps {
-  title: string;
-  status: string;
-}
 
 interface FormAddTechsProps {
   toggleModalAddVisibility: () => void;
@@ -27,9 +23,7 @@ export default function FormAddTech({
   });
 
   const createTech = (data: CreateTechProps) => {
-    const { title, status } = data;
-    api
-      .post("/users/techs", { title, status })
+    createUserTech(data)
       .then((res) => {
         if (res) {
           toggleModalAddVisibility();
