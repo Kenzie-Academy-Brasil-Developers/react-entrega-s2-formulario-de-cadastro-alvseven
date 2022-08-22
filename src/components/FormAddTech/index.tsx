@@ -5,7 +5,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addTechFormSchema } from "../../utils/schema";
 import { ModalContainer, CloseContainer } from "./styles";
-import { CreateTechProps, createUserTech } from "../../services/createTech";
+
+interface CreateTechProps {
+  title: string;
+  status: string;
+}
 
 interface FormAddTechsProps {
   toggleModalAddVisibility: () => void;
@@ -23,10 +27,11 @@ export default function FormAddTech({
   });
 
   const createTech = (data: CreateTechProps) => {
-    createUserTech(data)
+    const { title, status } = data;
+    api
+      .post("/users/techs", { title, status })
       .then((res) => {
-        console.log(res);
-        if (res.title) {
+        if (res) {
           toggleModalAddVisibility();
           toast.success("Tecnologia criada com sucesso!", {
             position: toast.POSITION.TOP_RIGHT,

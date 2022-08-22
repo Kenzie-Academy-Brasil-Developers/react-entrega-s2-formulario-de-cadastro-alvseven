@@ -4,6 +4,9 @@ export interface UserTechs {
   id: string;
   title: string;
   status: string;
+  user?: {
+    id: string;
+  };
   created_at: string;
   updated_at: string;
 }
