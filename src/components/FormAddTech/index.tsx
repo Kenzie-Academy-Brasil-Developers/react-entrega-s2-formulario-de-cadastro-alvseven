@@ -5,27 +5,31 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addTechFormSchema } from "../../utils/schema";
 import { ModalContainer, CloseContainer } from "./styles";
+import { CreateTechProps, createUserTech } from "../../services/createTech";
 
-export default function FormAddTech({ toggleModalAddVisibility }) {
+interface FormAddTechsProps {
+  toggleModalAddVisibility: () => void;
+}
+
+export default function FormAddTech({
+  toggleModalAddVisibility,
+}: FormAddTechsProps) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<CreateTechProps>({
     resolver: yupResolver(addTechFormSchema),
   });
 
-  const createTech = (data) => {
-    api
-      .post("/users/techs", {
-        title: data.title,
-        status: data.status,
-      })
+  const createTech = (data: CreateTechProps) => {
+    createUserTech(data)
       .then((res) => {
-        if (res.request.status === 201) {
+        console.log(res);
+        if (res.title) {
           toggleModalAddVisibility();
           toast.success("Tecnologia criada com sucesso!", {
-            position: toast.POSITION.RIGHT_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000,
           });
         }
@@ -34,12 +38,12 @@ export default function FormAddTech({ toggleModalAddVisibility }) {
         console.log(err);
         if (err.response.status === 401) {
           toast.error("Tecnologia já cadastrada!", {
-            position: toast.POSITION.RIGHT_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 2000,
           });
         } else {
           toast.error("Oops, algo deu errado :(", {
-            position: toast.POSITION.RIGHT_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 3000,
           });
         }

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthContext } from "../../contexts/AuthContext";
 
+import { LoginUserProps } from "../../services/userLogin";
 import { loginFormSchema } from "../../utils/schema";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -22,7 +23,7 @@ export default function FormLogin() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<LoginUserProps>({
     resolver: yupResolver(loginFormSchema),
   });
 

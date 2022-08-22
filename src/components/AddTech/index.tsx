@@ -1,6 +1,10 @@
 import { AddContainer, AddButton } from "./styles";
 
-export default function AddTech({ toggleModalAddVisibility }) {
+interface AddTechProps {
+  toggleModalAddVisibility: () => void;
+}
+
+export default function AddTech({ toggleModalAddVisibility }: AddTechProps) {
   return (
     <AddContainer>
       <h4>Tecnologias</h4>

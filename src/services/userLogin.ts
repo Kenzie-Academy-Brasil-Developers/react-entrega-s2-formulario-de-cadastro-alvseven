@@ -1,7 +1,7 @@
 import { api } from "./api";
 import { User } from "./getUser";
 
-interface LoginUserProps {
+export interface LoginUserProps {
   email: string;
   password: string;
 }

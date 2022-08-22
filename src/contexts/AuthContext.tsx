@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 
-import { registerUser } from "../services/registerUser";
+import { registerUser, RegisterUserProps } from "../services/registerUser";
 import { userLogin } from "../services/userLogin";
 import { User } from "../services/getUser";
 
@@ -16,15 +16,6 @@ interface AuthProviderData {
   isLoading: boolean;
   submit: (data: LoginUserProps) => void;
   onSubmit: (data: RegisterUserProps) => void;
-}
-
-interface RegisterUserProps {
-  email: string;
-  password: string;
-  name: string;
-  bio: string;
-  contact: number;
-  course_module: string;
 }
 
 interface LoginUserProps {

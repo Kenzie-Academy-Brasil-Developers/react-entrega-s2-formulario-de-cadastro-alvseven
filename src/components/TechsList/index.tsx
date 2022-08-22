@@ -1,17 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { api } from "../../services/api";
+import { UserTechs } from "../../services/getUser";
 import TechCard from "../TechCard";
 import { EmptyTechContainer, List } from "./styles";
 
+export interface TechListProps {
+  modalDetailsIsOpen: boolean;
+  setModalDetailsIsOpen: Dispatch<SetStateAction<boolean>>;
+  setTech: Dispatch<SetStateAction<UserTechs>>;
+  setTechId: Dispatch<SetStateAction<string>>;
+}
+
 export default function TechsList({
-  modalDetailIsOpen,
+  modalDetailsIsOpen,
   setModalDetailsIsOpen,
   setTech,
   setTechId,
-}) {
+}: TechListProps) {
   const userId = localStorage.getItem("@kenzie-hub:userId");
 
-  const [techs, setTechs] = useState([]);
+  const [techs, setTechs] = useState<UserTechs[]>([]);
 
   useEffect(() => {
     api.get(`/users/${userId}`).then((res) => setTechs(res.data.techs));
@@ -21,12 +29,12 @@ export default function TechsList({
     <>
       {techs.length > 0 ? (
         <List>
-          {techs.map((tech) => {
+          {techs.map((tech: UserTechs) => {
             return (
               <TechCard
                 tech={tech}
                 key={tech.id}
-                modalDetailIsOpen={modalDetailIsOpen}
+                modalDetailsIsOpen={modalDetailsIsOpen}
                 setModalDetailsIsOpen={setModalDetailsIsOpen}
                 setTechId={setTechId}
                 setTech={setTech}

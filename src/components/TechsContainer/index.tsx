@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { UserTechs } from "../../services/getUser";
 import AddTech from "../AddTech";
 import FormAddTech from "../FormAddTech";
 import FormDetailsTech from "../FormDetails";
@@ -7,10 +8,10 @@ import TechsList from "../TechsList";
 import { Container } from "./styles";
 
 export default function TechsContainer() {
-  const [modalAddIsOpen, setModalAddIsOpen] = useState(false);
-  const [modalDetailsIsOpen, setModalDetailsIsOpen] = useState(false);
-  const [techId, setTechId] = useState("");
-  const [tech, setTech] = useState(null);
+  const [modalAddIsOpen, setModalAddIsOpen] = useState<boolean>(false);
+  const [modalDetailsIsOpen, setModalDetailsIsOpen] = useState<boolean>(false);
+  const [techId, setTechId] = useState<string>("");
+  const [tech, setTech] = useState<UserTechs>({} as UserTechs);
 
   const toggleModalAddVisibility = () => {
     setModalAddIsOpen(!modalAddIsOpen);

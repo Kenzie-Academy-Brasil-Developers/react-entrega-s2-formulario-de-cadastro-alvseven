@@ -1,4 +1,14 @@
+import { Dispatch, SetStateAction, MouseEvent } from "react";
+import { UserTechs } from "../../services/getUser";
 import { TechListItem } from "./styles";
+
+interface TechCardProps {
+  tech: UserTechs;
+  modalDetailsIsOpen: boolean;
+  setModalDetailsIsOpen: Dispatch<SetStateAction<boolean>>;
+  setTech: Dispatch<SetStateAction<UserTechs>>;
+  setTechId: Dispatch<SetStateAction<string>>;
+}
 
 export default function TechCard({
   tech,
@@ -6,8 +16,8 @@ export default function TechCard({
   setModalDetailsIsOpen,
   setTech,
   setTechId,
-}) {
-  const toggleModalDetailsVisibility = (event) => {
+}: TechCardProps) {
+  const toggleModalDetailsVisibility = (event: any) => {
     setModalDetailsIsOpen(!modalDetailsIsOpen);
     setTechId(event.target.id);
     setTech(tech);

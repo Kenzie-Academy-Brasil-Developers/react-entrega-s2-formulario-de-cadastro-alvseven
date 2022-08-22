@@ -10,6 +10,7 @@ import { Container, FormContainer, Error } from "./styles";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { normalizePhoneNumber } from "../../utils/phonemask";
+import { RegisterUserProps } from "../../services/registerUser";
 
 export default function FormRegister() {
   const { onSubmit } = useContext(AuthContext);
@@ -20,7 +21,7 @@ export default function FormRegister() {
     watch,
     setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<RegisterUserProps>({
     resolver: yupResolver(registerFormSchema),
   });
 

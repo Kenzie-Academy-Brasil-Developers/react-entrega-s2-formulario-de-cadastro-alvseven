@@ -1,11 +1,12 @@
 import { api } from "./api";
 
-interface RegisterUserProps {
+export interface RegisterUserProps {
   email: string;
   password: string;
+  confirmPassword?: string;
   name: string;
   bio: string;
-  contact: number;
+  contact: string | null;
   course_module: string;
 }
 

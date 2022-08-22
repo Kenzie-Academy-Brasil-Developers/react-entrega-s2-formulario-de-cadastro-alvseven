@@ -1,4 +1,4 @@
-export const normalizePhoneNumber = (value) => {
+export const normalizePhoneNumber = (value: string | null) => {
   if (!value) {
     return "";
   }
