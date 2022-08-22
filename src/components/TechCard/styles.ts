@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 
+interface ColorProps {
+  status: string;
+}
+
 export const TechInfo = styled.div`
   display: flex;
   align-items: center;
@@ -43,7 +47,7 @@ export const TechListItem = styled.li`
     font-family: "Nunito", sans-serif;
     font-weight: 400;
     font-size: 0.85rem;
-    ${({ status }) =>
+    ${({ status }: ColorProps) =>
       status === "Avançado"
         ? css`
             color: #5adbff;
