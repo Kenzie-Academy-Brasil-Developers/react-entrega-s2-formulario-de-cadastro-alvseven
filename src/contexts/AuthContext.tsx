@@ -28,7 +28,7 @@ export const AuthContext = createContext<AuthProviderData>(
 );
 
 const AuthProvider = ({ children }: AuthProps) => {
-  const [user, setUser] = useState<User>({} as User);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,7 +36,6 @@ const AuthProvider = ({ children }: AuthProps) => {
       const token = localStorage.getItem("@kenzie-hub:token");
       if (token) {
         try {
-          const token = localStorage.getItem("@kenzie-hub:token");
           const { data } = await api.get("/profile", {
             headers: {
               Authorization: `Bearer ${token}`,
