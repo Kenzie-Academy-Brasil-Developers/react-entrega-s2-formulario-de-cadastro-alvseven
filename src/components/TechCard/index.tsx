@@ -17,9 +17,10 @@ export default function TechCard({
   setTech,
   setTechId,
 }: TechCardProps) {
-  const toggleModalDetailsVisibility = (event: any) => {
+  const toggleModalDetailsVisibility = (event: MouseEvent) => {
+    const target = event.target as HTMLLIElement;
     setModalDetailsIsOpen(!modalDetailsIsOpen);
-    setTechId(event.target.id);
+    setTechId(target.id);
     setTech(tech);
   };
 
