@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "animate.css";
 
 export const Container = styled.div`
   display: flex;
@@ -7,6 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   padding: 1rem 0.8rem;
   background-color: #121214;
+  animation: fadeIn 2s;
 
   h4 {
     font-family: "Inter";

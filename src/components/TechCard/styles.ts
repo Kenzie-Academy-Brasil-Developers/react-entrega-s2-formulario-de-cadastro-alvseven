@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import "animate.css";
 
 interface ColorProps {
   status: string;
@@ -27,6 +28,7 @@ export const TechListItem = styled.li`
   border: 1px solid transparent;
   border-radius: 4px;
   cursor: pointer;
+  animation: backInLeft 3s;
 
   :hover {
     transition: 700ms;

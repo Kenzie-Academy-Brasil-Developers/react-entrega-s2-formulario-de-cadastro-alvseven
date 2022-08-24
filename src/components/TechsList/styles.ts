@@ -9,6 +9,7 @@ export const List = styled.ul`
   padding: 0.8rem;
   border-top: 2px solid #212529;
   border-radius: 4px;
+  animation: bounce 2s;
 
   @media (min-width: 688px) {
     width: 75%;

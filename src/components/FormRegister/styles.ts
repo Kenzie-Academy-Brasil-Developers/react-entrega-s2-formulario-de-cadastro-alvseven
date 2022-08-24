@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "animate.css";
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   width: 90vw;
   margin: 0 auto;
-
+  animation: fadeIn 3s;
   img {
     width: 6.25rem;
     height: 0.9rem;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "animate.css";
 
 export const ModalInner = styled.div`
   width: 100vw;
@@ -7,6 +8,7 @@ export const ModalInner = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(180, 166, 166, 0.2);
+  animation: fadeIn 2s;
 `;
 
 export const ModalContainer = styled.div`

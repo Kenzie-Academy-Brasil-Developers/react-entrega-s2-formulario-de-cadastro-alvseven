@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import "animate.css";
 
 export const AddContainer = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ export const AddButton = styled.button`
 
   :hover {
     transition: 600ms;
-    transform: rotateX(180deg);
+    animation: bounce 2s;
     color: #212325;
     background-color: #2ceaa3;
     border: 1px solid transparent;

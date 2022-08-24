@@ -26,7 +26,7 @@ export default function UserInfo() {
   return (
     <UserInfoContainer>
       <ToastContainer />
-      <h3>Olá, {userName}</h3>
+      <h3>Olá, {userName}, como vai você?</h3>
       <p>{userModule}</p>
     </UserInfoContainer>
   );
